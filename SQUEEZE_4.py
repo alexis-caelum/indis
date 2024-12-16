@@ -1,8 +1,9 @@
-def wma_squeeze_4(df):
-    # Calculate WMA
-    window = 4
-    weights = np.arange(1, window + 1)
-    ma = df['Close'].rolling(window).apply(lambda prices: np.dot(prices, weights) / weights.sum(), raw=True)
+def dema_squeeze_3(df):
+    window = 3
+    # Calculate DEMA
+    ema1 = df['Close'].ewm(span=window, adjust=False).mean()
+    ema2 = ema1.ewm(span=window, adjust=False).mean()
+    ma = 2 * ema1 - ema2
 
     # Calculate Bollinger Bands
     std = df['Close'].rolling(window).std()

@@ -1,6 +1,6 @@
-def wma_squeeze_4(df):
+def wma_squeeze_3(df):
     # Calculate WMA
-    window = 4
+    window = 3
     weights = np.arange(1, window + 1)
     ma = df['Close'].rolling(window).apply(lambda prices: np.dot(prices, weights) / weights.sum(), raw=True)
 

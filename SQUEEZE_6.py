@@ -1,13 +1,13 @@
-def wma_squeeze_4(df):
+def wma_squeeze_3_bb15(df):
     # Calculate WMA
-    window = 4
+    window = 3
     weights = np.arange(1, window + 1)
     ma = df['Close'].rolling(window).apply(lambda prices: np.dot(prices, weights) / weights.sum(), raw=True)
 
     # Calculate Bollinger Bands
     std = df['Close'].rolling(window).std()
-    upper_band = ma + (std * 2.0)
-    lower_band = ma - (std * 2.0)
+    upper_band = ma + (std * 1.5)
+    lower_band = ma - (std * 1.5)
 
     # Calculate squeeze conditions
     band_width = upper_band - lower_band
